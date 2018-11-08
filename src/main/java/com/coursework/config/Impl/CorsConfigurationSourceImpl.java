@@ -1,4 +1,4 @@
-package com.coursework.config;
+package com.coursework.config.Impl;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
@@ -12,10 +12,9 @@ public class CorsConfigurationSourceImpl implements CorsConfigurationSource {
     @Override
     public CorsConfiguration getCorsConfiguration(HttpServletRequest httpServletRequest) {
         final CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(Collections.singletonList("*"));
         configuration.setAllowedHeaders(Collections.singletonList("*"));
         configuration.setAllowedMethods(Collections.singletonList("*"));
-        configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
         configuration.setAllowCredentials(true);
         return configuration;
     }

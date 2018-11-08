@@ -1,4 +1,4 @@
-package com.coursework.config;
+package com.coursework.config.Impl;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.AuthenticationException;

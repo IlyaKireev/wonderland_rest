@@ -1,5 +1,9 @@
 package com.coursework.config;
 
+import com.coursework.config.Impl.AuthenticationFailureHandlerImpl;
+import com.coursework.config.Impl.AuthenticationSuccessHandlerImpl;
+import com.coursework.config.Impl.CorsConfigurationSourceImpl;
+import com.coursework.config.Impl.LogoutSuccessHandlerImpl;
 import com.coursework.service.Impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -93,7 +97,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    public void configure(WebSecurity webSecurity) throws Exception {
+    public void configure(WebSecurity webSecurity) {
         webSecurity.ignoring().antMatchers("/resources/**");
     }
 

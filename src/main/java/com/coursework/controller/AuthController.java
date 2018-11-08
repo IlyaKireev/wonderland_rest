@@ -4,18 +4,17 @@ import com.coursework.model.User;
 import com.coursework.service.Impl.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
 @RestController
 @RequestMapping
-public class AuthenticationController {
+public class AuthController {
 
     @Autowired
     private UserDetailsServiceImpl userService;
@@ -46,4 +45,13 @@ public class AuthenticationController {
         return HttpStatus.CONFLICT;
     }
 
+    @GetMapping("/isAuthorized")
+    public HttpStatus isAuthorized() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByEmail(auth.getName());
+        if(user != null) {
+            return HttpStatus.OK;
+        }
+        return HttpStatus.UNAUTHORIZED;
+    }
 }
